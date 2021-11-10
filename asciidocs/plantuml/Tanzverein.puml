@@ -10,29 +10,33 @@ class Tänzer{
 
 }
 
-class Kurs{
+class Tanzstunde{
     -raum: Raum
 }
 
 class Stundenplan{
-    -kurs: Kurs
-    -trainer: Trainer
-    -tänzer: Tänzer
+    -tanzstunde: Tanzstunde
+    -person: Person
 }
 
 class Trainer{
 
 }
+class Person{
+    -vorname: string
+    -nachname: string
+}
 
 
 
 
-Kurs "*" -l-> "1" Raum
-Kurs "*" -- "*" Trainer
-Kurs "*" -l- "*" Tänzer
+Tanzstunde "*" -r-> "1" Raum
+Tanzstunde "*" -- "*" Person
 
-(Kurs, Trainer) .. Stundenplan
-(Kurs, Tänzer) .. Stundenplan
+(Tanzstunde, Person) .. Stundenplan
 
+
+Person <|-- Tänzer
+Person <|-- Trainer
 
 @enduml

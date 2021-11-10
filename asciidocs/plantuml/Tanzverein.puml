@@ -11,20 +11,19 @@ class Tänzer{
 }
 
 class Kurs{
-
+    -raum: Raum
 }
 
 class Stundenplan{
-
+    -kurs: Kurs
+    -trainer: Trainer
+    -tänzer: Tänzer
 }
 
 class Trainer{
 
 }
 
-class Tänzer_Trainer_Verteilung{
-
-}
 
 
 
@@ -34,7 +33,6 @@ Kurs "*" -l- "*" Tänzer
 
 (Kurs, Trainer) .. Stundenplan
 (Kurs, Tänzer) .. Stundenplan
-Tänzer "*" -- "*" Trainer
-(Trainer, Tänzer) .. Tänzer_Trainer_Verteilung
+
 
 @enduml

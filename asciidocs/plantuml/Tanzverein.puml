@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+class Raum{
+
+}
+
+class Tänzer{
+
+}
+
+class Kurs{
+
+}
+
+class Stundenplan{
+
+}
+
+class Trainer{
+
+}
+
+class Tänzer_Trainer_Verteilung{
+
+}
+
+
+
+Kurs "*" -l-> "1" Raum
+Kurs "*" -- "*" Trainer
+Kurs "*" -l- "*" Tänzer
+
+(Kurs, Trainer) .. Stundenplan
+(Kurs, Tänzer) .. Stundenplan
+Tänzer "*" -- "*" Trainer
+(Trainer, Tänzer) .. Tänzer_Trainer_Verteilung
+
+@enduml

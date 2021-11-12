@@ -13,11 +13,15 @@ ifdef::backend-html5[]
 
 // print the toc here (not at the default position)
 //toc::[]
-== Tanzverein
+= Tanzverein
+
+== CLD
 
 [plantuml,align=left]
 ----
 include::plantuml/Tanzverein.puml[]
 ----
 
+== Erklärung
+Das Miniprojekt verwaltet den Stundenplan eines Tanzvereins.
 

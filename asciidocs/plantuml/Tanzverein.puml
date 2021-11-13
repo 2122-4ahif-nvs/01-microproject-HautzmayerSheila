@@ -3,40 +3,40 @@
 
 
 class Raum{
-
+    -termin: Termin
+    -raumNummer: Long
 }
 
-class Tänzer{
 
+class Kurs{
+    -termin: Termin
+    -beschreibung: String
+    -name: String
 }
 
-class Tanzstunde{
-    -raum: Raum
-}
-
-class Stundenplan{
-    -tanzstunde: Tanzstunde
+class Kurseinteilung{
+    -kurs: Kurs
     -person: Person
 }
 
-class Trainer{
-
-}
 class Person{
     -vorname: string
     -nachname: string
 }
 
+class Termin{
+    -von: DateTime
+    -bis: DateTime
+}
+
+
+Kurs "*" -- "*" Person
+Termin "*" -- "1" Kurs
+Termin "*" -l- "1" Raum
+
+(Kurs, Person) .. Kurseinteilung
 
 
 
-Tanzstunde "*" -r-> "1" Raum
-Tanzstunde "*" -- "*" Person
-
-(Tanzstunde, Person) .. Stundenplan
-
-
-Person <|-- Tänzer
-Person <|-- Trainer
 
 @enduml

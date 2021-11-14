@@ -28,10 +28,10 @@ class PersonTest {
 
     @Test
     public void createPerson(){
-       /* Person person = new Person("Max", "Mustermann");
+        Person person = new Person("Max", "Mustermann");
         personRepository.save(person);
         assertThat(personRepository.findPersonById(5L).getFirstName()).isEqualTo("Max");
-        logger.info(personRepository.findPersonById(5L));*/
+        logger.info(personRepository.findPersonById(5L));
     }
 
     @Test

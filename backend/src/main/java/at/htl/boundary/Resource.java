@@ -1,24 +1,35 @@
 package at.htl.boundary;
 
+import at.htl.control.CourseRepository;
 import at.htl.control.PersonRepository;
+import at.htl.entity.Course;
+import at.htl.entity.Person;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.jboss.logging.Logger;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Path("/FindAll")
+@Path("/Person")
 public class Resource {
     @ConfigProperty(name = "greeting", defaultValue = "hi")
     String greeting;
 
     @Inject
+    Logger logger;
+
+    @Inject
     PersonRepository personRepository;
+
+    @Inject
+    CourseRepository courseRepository;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -41,10 +52,27 @@ public class Resource {
     }
 
 
-    @Path("/FindByIdNQ")
+    @Path("/FindByIdNq")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Person test() {
+        return personRepository.findPersonByIdNamedQuery();
+    }
+
+    @Path("/FindAllCourses")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String test() {
-        return personRepository.findPersonByIdNamedQuery().getFirstName();
+    public List<Course> findAllCourses() {
+        return courseRepository.getAllCourses();
+    }
+
+    @Path("AddPerson")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addPersonWithJsonb(Person person) {
+
+        personRepository.save(person);
+        return Response.ok(personRepository.save(person)).build();
     }
 }

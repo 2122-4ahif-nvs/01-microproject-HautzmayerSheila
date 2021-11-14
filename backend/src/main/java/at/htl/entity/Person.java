@@ -1,6 +1,9 @@
 package at.htl.entity;
 
+import javax.json.bind.annotation.JsonbProperty;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -28,16 +31,31 @@ public class Person {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String firstName;
     private String lastName;
 
 
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<CoursePerson> coursePerson;
+
+
     public Person(String firstName, String lastName) {
+        this();
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
     public Person() {
+        this.coursePerson = new ArrayList<>();
+    }
+
+    public List<CoursePerson> getCoursePerson() {
+        return coursePerson;
+    }
+
+    public void setCoursePerson(List<CoursePerson> coursePerson) {
+        this.coursePerson = coursePerson;
     }
 
     public String getLastName() {

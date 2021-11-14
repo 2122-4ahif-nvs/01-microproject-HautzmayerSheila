@@ -14,7 +14,6 @@ import java.util.List;
 public class PersonRepository {
     @Inject
     EntityManager em;
-    PersonRepository personRepository;
 
     @Transactional
     public Person save(Person person){

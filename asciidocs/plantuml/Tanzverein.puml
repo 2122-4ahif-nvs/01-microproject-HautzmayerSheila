@@ -1,15 +1,15 @@
 @startuml
-'https://plantuml.com/class-diagram
+left to right direction
 
 
 class Raum{
-    -termin: Termin
-    -raumNummer: Long
+    -raumNr: Long
 }
 
 
 class Kurs{
-    -termin: Termin
+    -kursNr: int
+    -maxPersonen: int
     -beschreibung: String
     -name: String
 }
@@ -21,23 +21,22 @@ class Kurseinteilung{
 }
 
 class Person{
-    -vorname: string
-    -nachname: string
+    -personenNr: int
+    -vorname: String
+    -nachname: String
 }
 
 class Termin{
     -von: DateTime
     -bis: DateTime
+    -kurs: Kurs
+    -raum: Raum
 }
 
 
 Kurs "*" -- "*" Person
-Termin "*" -- "1" Kurs
-Termin "*" -l- "1" Raum
+Kurs "*" -- "*" Raum
 
+(Raum, Kurs) .. Termin
 (Kurs, Person) .. Kurseinteilung
-
-
-
-
 @enduml

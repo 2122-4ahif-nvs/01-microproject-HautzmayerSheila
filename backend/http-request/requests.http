@@ -1,0 +1,7 @@
+POST http://localhost:8080/Person/AddPerson
+Content-Type: application/json
+
+{
+  "firstName":"Mimi",
+  "lastName":"Muh"
+}

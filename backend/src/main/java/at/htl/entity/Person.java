@@ -12,11 +12,19 @@ import javax.persistence.*;
         ),
         @NamedQuery(
                 name = "Person.findPersonById",
-                query = "Select p.firstName, p.lastName from Person p where p.id = :fId"
+                query = "Select p from Person p where p.id = :id"
         )})
 
 
 public class Person {
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

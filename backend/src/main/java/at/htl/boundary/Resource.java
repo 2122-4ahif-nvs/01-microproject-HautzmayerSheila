@@ -41,4 +41,10 @@ public class Resource {
     }
 
 
+    @Path("/FindByIdNQ")
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String test() {
+        return personRepository.findPersonByIdNamedQuery().getFirstName();
+    }
 }

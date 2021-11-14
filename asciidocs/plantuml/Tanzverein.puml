@@ -17,6 +17,7 @@ class Kurs{
 class Kurseinteilung{
     -kurs: Kurs
     -person: Person
+    -person_typ: String
 }
 
 class Person{

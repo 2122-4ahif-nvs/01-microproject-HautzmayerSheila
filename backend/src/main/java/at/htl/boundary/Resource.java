@@ -75,4 +75,17 @@ public class Resource {
         personRepository.save(person);
         return Response.ok(personRepository.save(person)).build();
     }
+
+    @POST
+    @Path("/Add")
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
+    @Produces(MediaType.TEXT_PLAIN)
+    public String addProduct(
+            @FormParam("firstName") String firstName,
+            @FormParam("lastName") String lastName
+    ) {
+        Person p = new Person(firstName, lastName);
+        personRepository.save(p);
+        return p.toString();
+    }
 }

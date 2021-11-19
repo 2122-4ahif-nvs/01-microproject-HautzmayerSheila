@@ -1,23 +1,20 @@
 package at.htl.entity;
 
-import javax.inject.Inject;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class CoursePerson {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private PersonType personType;
+    private PersonTypeSchool personTypeSchool;
 
     @ManyToOne
     private Course course;
     @ManyToOne
     private Person person;
 
-    public CoursePerson(PersonType personType, Course course, Person person) {
-        this.personType = personType;
+    public CoursePerson(PersonTypeSchool personTypeSchool, Course course, Person person) {
+        this.personTypeSchool = personTypeSchool;
         this.course = course;
         this.person = person;
     }
@@ -49,11 +46,11 @@ public class CoursePerson {
         this.id = id;
     }
 
-    public PersonType getPersonType() {
-        return personType;
+    public PersonTypeSchool getPersonType() {
+        return personTypeSchool;
     }
 
-    public void setPersonType(PersonType personType) {
-        this.personType = personType;
+    public void setPersonType(PersonTypeSchool personTypeSchool) {
+        this.personTypeSchool = personTypeSchool;
     }
 }

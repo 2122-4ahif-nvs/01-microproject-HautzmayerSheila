@@ -1,6 +1,6 @@
 package at.htl.entity;
 
-public enum PersonType {
+public enum PersonTypeSchool {
     STUDENT,
     TEACHER
 }

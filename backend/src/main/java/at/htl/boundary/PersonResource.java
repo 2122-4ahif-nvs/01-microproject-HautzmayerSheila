@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Path("/Person")
-public class Resource {
+public class PersonResource {
     @ConfigProperty(name = "greeting", defaultValue = "hi")
     String greeting;
 

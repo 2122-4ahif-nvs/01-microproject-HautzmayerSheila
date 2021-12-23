@@ -1,0 +1,21 @@
+= Documentation
+
+== GraphQL
+https://github.com/2122-4ahif-nvs/04-lab-graphql-HautzmayerSheila
+
+=== Was ist GraphQL
+
+
+== Validation
+https://github.com/2122-4ahif-nvs/05-validation-qute-HautzmayerSheila
+
+=== Was ist Validation
+
+== Qute
+https://github.com/2122-4ahif-nvs/05-validation-qute-HautzmayerSheila
+
+=== Was ist Qute
+
+== GRPC
+
+=== Was ist GRPC

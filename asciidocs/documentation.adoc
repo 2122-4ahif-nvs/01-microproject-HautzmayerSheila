@@ -1,5 +1,14 @@
 = Documentation
 
+== Websockets
+Sind in meinem Projekt als ChatSocket eingebaut.
+Dafür wurde tutorial von der Quarkus.io Website verwendet.
+Idee liegt darin, dass Personen fragen wegen der Tanztermine, Tanzkurse, ... stellen können.
+
+=== Was sind Websockets
+* Eine dauerhafte Verbindung zwischen Server und Client
+* Man kann mit http Daten vom Server zum Client schicken
+
 == GraphQL
 https://github.com/2122-4ahif-nvs/04-lab-graphql-HautzmayerSheila
 

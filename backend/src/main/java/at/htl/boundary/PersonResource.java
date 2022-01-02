@@ -5,6 +5,8 @@ import at.htl.control.PersonRepository;
 import at.htl.entity.Course;
 import at.htl.entity.Person;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.graphql.GraphQLApi;
+import org.eclipse.microprofile.graphql.Query;
 import org.jboss.logging.Logger;
 
 import javax.inject.Inject;
@@ -17,6 +19,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@GraphQLApi
 @Path("/Person")
 public class PersonResource {
     @ConfigProperty(name = "greeting", defaultValue = "hi")
@@ -33,15 +36,17 @@ public class PersonResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public List<String> findAll() {
-        return personRepository.findAll().stream().map(person -> person.getFirstName()).collect(Collectors.toList());
+    @Query("allPeople")
+    public List<Person> findAll() {
+        return personRepository.findAll();
     }
 
     @Path("/NamedQuery")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public List<String> findAllNamedQuery() {
-        return personRepository.findAllNamedQuery().stream().map(person -> person.getFirstName()).collect(Collectors.toList());
+        return personRepository.findAllNamedQuery().stream()
+                .map(person -> person.getFirstName()).collect(Collectors.toList());
     }
 
     @Path("/FindById/{id}")

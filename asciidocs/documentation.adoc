@@ -1,6 +1,8 @@
 = Documentation
 
 == Websockets
+
+=== Umsetzung im Mikroprojekt
 Sind in meinem Projekt als ChatSocket eingebaut.
 Dafür wurde tutorial von der Quarkus.io Website verwendet.
 Idee liegt darin, dass Personen fragen wegen der Tanztermine, Tanzkurse, ... stellen können.
@@ -10,9 +12,28 @@ Idee liegt darin, dass Personen fragen wegen der Tanztermine, Tanzkurse, ... ste
 * Man kann mit http Daten vom Server zum Client schicken
 
 == GraphQL
+
+=== Umsetzung in Übungsrepository
 https://github.com/2122-4ahif-nvs/04-lab-graphql-HautzmayerSheila
 
+=== Umsetzung im Mikroprojekt
+Ist in der PersonResource bei der Methode findAll().
+Aufruf findet dann auf dem GraphQL Server mit folgendem statt.
+
+[source, java]
+----
+query allPeople {
+allPeople {
+firstName,
+lastName
+}
+}
+
+----
+
 === Was ist GraphQL
+Es ist eine Abfragesprache. Man erhält nur die Daten, welche man wirklich braucht und möchte.
+Durch GraphQL werden APIs schneller und auch flexibler.
 
 
 == Validation

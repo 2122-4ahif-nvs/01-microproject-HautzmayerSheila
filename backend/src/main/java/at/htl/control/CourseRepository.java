@@ -6,6 +6,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.List;
 
 @ApplicationScoped
@@ -23,5 +24,9 @@ public class CourseRepository {
     public List<Course> getAllCourses(){
         List<Course> courses = entityManager.createQuery("Select c from Course c").getResultList();
         return entityManager.createQuery("Select c from Course c").getResultList();
+    }
+
+    public void addCourse(@Valid Course course) {
+        this.save(course);
     }
 }

@@ -1,4 +1,4 @@
-= Documentation
+= Dokumentation
 
 == Websockets
 
@@ -17,10 +17,37 @@ Idee liegt darin, dass Personen fragen wegen der Tanztermine, Tanzkurse, ... ste
 https://github.com/2122-4ahif-nvs/04-lab-graphql-HautzmayerSheila
 
 === Umsetzung im Mikroprojekt
-Ist in der PersonResource bei der Methode findAll().
-Aufruf findet dann auf dem GraphQL Server mit folgendem statt.
+<1> @GraphQLApi muss über der Klasse hinzugefügt werden.
+<2> Bei der findAll() Methode wird @Query(...) hinzugefügt um später darauf zugreifen zu können.
 
 [source, java]
+----
+@GraphQLApi <1>
+@Path("/Person")
+public class PersonResource {
+    @ConfigProperty(name = "greeting", defaultValue = "hi")
+    String greeting;
+
+    @Inject
+    Logger logger;
+
+    @Inject
+    PersonRepository personRepository;
+
+    @Inject
+    CourseRepository courseRepository;
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Query("allPeople") <2>
+    public List<Person> findAll() {
+        return personRepository.findAll();
+    }
+
+----
+Aufruf findet dann auf dem GraphQL Server mit folgendem statt.
+
+[source,java]
 ----
 query allPeople {
 allPeople {
@@ -39,7 +66,100 @@ Durch GraphQL werden APIs schneller und auch flexibler.
 == Validation
 https://github.com/2122-4ahif-nvs/05-validation-qute-HautzmayerSheila
 
+=== Umsetzung im Mikroprojekt
+
+==== Validierung in Klasse Course
+
+<1> Validierung über das zu validierende Feld schreiben
+
+[source, java]
+----
+
+@Entity
+public class Course {
+@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
+private String name;
+
+    @Min(message="Course has too less people", value=1) <1>
+    private int maxNumberOfPeople;
+
+----
+
+==== Validierung beim Endpoint
+
+<1> Klasse Result hinzufügen
+<2> @Valid wird bei der Parametergabe verwendet
+
+[source, java]
+----
+@Path("/end-point-method-validation")
+@POST
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+public Result tryMeEndPointMethodValidation(@Valid Course course) { <2>
+return new Result("Course is valid! It was validated by end point method validation.");
+}
+
+public static class Result {  <1>
+
+        private String message;
+        private boolean success;
+
+        Result(String message) {
+            this.success = true;
+            this.message = message;
+        }
+
+        Result(Set<? extends ConstraintViolation<?>> violations) {
+            this.success = false;
+            this.message = violations.stream()
+                    .map(cv -> cv.getMessage())
+                    .collect(Collectors.joining(", "));
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public boolean isSuccess() {
+            return success;
+        }
+
+    }
+----
+
+==== Validierung im Repository
+
+<1> Aufruf der Methode im Repo.
+<2> @Valid Annotation direkt in der Methode im Repo hinzufügen
+
+[source, java]
+----
+@Path("/repo-method-validation")
+@POST
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+public Result tryMeServiceMethodValidation(Course course) {
+try {
+courseRepository.validateCourse(course); <1>
+return new Result("Course is valid! It was validated by service method validation.");
+} catch (ConstraintViolationException e) {
+return new Result(e.getConstraintViolations());
+}
+}
+----
+
+[source,java]
+----
+public void addCourse(@Valid Course course) { <2>
+this.save(course);
+}
+----
+
 === Was ist Validation
+
+Durch Validation werden bestimmte Regeln befolgt. Beispielsweise ob ein Feld einer bestimmten Größe haben oder nicht leer sein dürfen.
 
 == Qute
 https://github.com/2122-4ahif-nvs/05-validation-qute-HautzmayerSheila

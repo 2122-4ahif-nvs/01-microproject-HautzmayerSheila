@@ -1,6 +1,7 @@
 package at.htl.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,8 @@ public class Course {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @Min(message="Course has too less people", value=1)
     private int maxNumberOfPeople;
     private String description;
 

@@ -2,6 +2,7 @@ package at.htl.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +10,12 @@ import java.util.List;
 public class Course {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message="Name must not be blank")
     private String name;
 
     @Min(message="Course has too less people", value=1)
     private int maxNumberOfPeople;
+    @NotBlank(message="Description must not be blank")
     private String description;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

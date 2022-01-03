@@ -21,13 +21,33 @@ public class Appointment {
     @ManyToOne
     private Course course;
 
-    public Appointment(LocalDateTime startTime, LocalDateTime endTime, Course course) {
+    @ManyToOne
+    private Room room;
+
+    public Appointment(LocalDateTime startTime, LocalDateTime endTime, Course course, Room room) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.course = course;
+        this.room = room;
     }
 
     public Appointment() {
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public Long getId() {

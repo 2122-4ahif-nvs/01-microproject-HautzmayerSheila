@@ -2,16 +2,41 @@
 
 == Websockets
 
-=== Umsetzung im Mikroprojekt
-Sind in meinem Projekt als ChatSocket eingebaut.
-Dafür wurde tutorial von der Quarkus.io Website verwendet.
-Idee liegt darin, dass Personen fragen wegen der Tanztermine, Tanzkurse, ... stellen können.
+=== Dependencies
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-websockets</artifactId>
+</dependency>
+----
 
 === Was sind Websockets
 * Eine dauerhafte Verbindung zwischen Server und Client
 * Man kann mit http Daten vom Server zum Client schicken
 
+=== Umsetzung im Mikroprojekt
+Sind in meinem Projekt als ChatSocket eingebaut.
+Dafür wurde tutorial von der Quarkus.io Website verwendet.
+Idee liegt darin, dass Personen fragen wegen der Tanztermine, Tanzkurse, ... stellen können.
+
+
 == GraphQL
+
+=== Dependencies
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-smallrye-graphql</artifactId>
+</dependency>
+----
+
+=== Was ist GraphQL
+Es ist eine Abfragesprache. Man erhält nur die Daten, welche man wirklich braucht und möchte.
+Durch GraphQL werden APIs schneller und auch flexibler.
 
 === Umsetzung im Übungsrepository
 https://github.com/2122-4ahif-nvs/04-lab-graphql-HautzmayerSheila
@@ -58,12 +83,28 @@ lastName
 
 ----
 
-=== Was ist GraphQL
-Es ist eine Abfragesprache. Man erhält nur die Daten, welche man wirklich braucht und möchte.
-Durch GraphQL werden APIs schneller und auch flexibler.
+
 
 
 == Validation
+
+=== Dependencies
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-hibernate-validator</artifactId>
+</dependency>
+----
+
+
+=== Was ist Validation
+
+Durch Validation werden bestimmte Regeln befolgt. Beispielsweise ob ein Feld einer bestimmten Größe haben oder nicht leer sein dürfen.
+
+=== Umsetzung im ÜbungsRepository
+
 https://github.com/2122-4ahif-nvs/05-validation-qute-HautzmayerSheila
 
 === Umsetzung im Mikroprojekt
@@ -162,11 +203,18 @@ this.save(course);
 }
 ----
 
-=== Was ist Validation
-
-Durch Validation werden bestimmte Regeln befolgt. Beispielsweise ob ein Feld einer bestimmten Größe haben oder nicht leer sein dürfen.
 
 == Qute
+
+=== Dependencies
+
+[source,xml]
+----
+<dependency>
+<groupId>io.quarkus</groupId>
+<artifactId>quarkus-resteasy-qute</artifactId>
+</dependency>
+----
 
 
 === Was ist Qute
@@ -212,4 +260,24 @@ public class HelloResource { <1>
 
 == GRPC
 
+=== Dependencies
+
+[source,xml]
+----
+<dependency>
+  <groupId>io.quarkus</groupId>
+  <artifactId>quarkus-grpc</artifactId>
+</dependency>
+----
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-resteasy-reactive</artifactId>
+</dependency>
+----
+
 === Was ist GRPC
+Google Remote Procedure Call
+Für Microservices ist die Performance besser als bei der Verwendung von Rest.

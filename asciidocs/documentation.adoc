@@ -281,3 +281,90 @@ public class HelloResource { <1>
 === Was ist GRPC
 Google Remote Procedure Call
 Für Microservices ist die Performance besser als bei der Verwendung von Rest.
+
+=== Umsetzung in Mikroprojekt
+
+<1> In Directory /src/main/proto wird folgendes helloworld.proto file erzeugt
+
+[source,prototext]
+----
+syntax = "proto3"; <1>
+
+option java_multiple_files = true;
+option java_package = "io.quarkus.example";
+option java_outer_classname = "HelloWorldProto";
+
+package helloworld;
+
+// The greeting service definition.
+service Greeter {
+// Sends a greeting
+rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+string name = 1;
+}
+
+// The response message containing the greetings
+message HelloReply {
+string message = 1;
+}
+----
+
+Um die Klassen für die Verwendung von GRPC zu generieren muss man
+
+[source, text]
+----
+mvn compile
+----
+
+im Terminal ausführen.
+
+<1> Service für GRPC wird implementiert
+<2> @GrpcService wird injected
+<3> Das Service Interface Greeter wird implementiert
+<4> Methode um hello zurückzuliefern wird hinzugefügt
+
+[source,java]
+----
+<1>
+@GrpcService <2>
+public class HelloWorldRepository implements Greeter { <3>
+
+    @Override
+    public Uni<HelloReply> sayHello(HelloRequest request) { <4>
+        return Uni.createFrom().item(() ->
+                HelloReply.newBuilder().setMessage("Hello " + request.getName()).build()
+        );
+    }
+}
+----
+
+<1> Resource wird implementiert
+<2> @GRPCClient wird injected
+
+[source, java]
+----
+<1>
+@Path("/hello")
+public class HelloWorldResource {
+
+    @GrpcClient <2>
+    Greeter hello;
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String hello() {
+        return "hello";
+    }
+
+    @GET
+    @Path("/{name}")
+    public Uni<String> hello(@PathParam("name") String name) {
+        return hello.sayHello(HelloRequest.newBuilder().setName(name).build())
+                .onItem().transform(helloReply -> helloReply.getMessage());
+    }
+}
+----

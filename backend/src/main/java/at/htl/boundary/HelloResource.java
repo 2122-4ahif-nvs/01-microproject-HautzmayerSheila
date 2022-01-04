@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 import io.quarkus.qute.TemplateInstance;
 import io.quarkus.qute.CheckedTemplate;
 
-@Path("hello")
+@Path("helloRes")
 public class HelloResource {
 
     @CheckedTemplate

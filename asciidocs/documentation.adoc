@@ -13,7 +13,7 @@ Idee liegt darin, dass Personen fragen wegen der Tanztermine, Tanzkurse, ... ste
 
 == GraphQL
 
-=== Umsetzung in Übungsrepository
+=== Umsetzung im Übungsrepository
 https://github.com/2122-4ahif-nvs/04-lab-graphql-HautzmayerSheila
 
 === Umsetzung im Mikroprojekt
@@ -167,12 +167,48 @@ this.save(course);
 Durch Validation werden bestimmte Regeln befolgt. Beispielsweise ob ein Feld einer bestimmten Größe haben oder nicht leer sein dürfen.
 
 == Qute
-https://github.com/2122-4ahif-nvs/05-validation-qute-HautzmayerSheila
+
 
 === Was ist Qute
 Es wird eine Art von FrontEnd erstellt.
 Man kann zur Laufzeit den Aufbau von Objekten sehen.
 Es wird die reflection durch die verringerung von ger Größe von native images minimiert.
+
+=== Umsetzung im ÜbungsRepository
+https://github.com/2122-4ahif-nvs/05-validation-qute-HautzmayerSheila
+
+=== Umsetzung im Mikroprojekt
+
+<1> Simples Template im Pfad /src/main/resources/templates/ItemResource/hello.txt
+
+[source,text]
+----
+Welcome to the dance studio {name}!
+----
+
+
+<1> Eine HelloResource ist geadded worden.
+<2> Template wird erzeugt
+<3> Neue Template Instanz wird zurückgegeben.
+
+[source,java]
+----
+@Path("hello")
+public class HelloResource { <1>
+
+    @CheckedTemplate
+    public static class Templates { <2>
+        public static native TemplateInstance hello(String name);
+    }
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public TemplateInstance get(@QueryParam("name") String name) {
+        return Templates.hello(name); <3>
+    }
+}
+
+----
 
 == GRPC
 

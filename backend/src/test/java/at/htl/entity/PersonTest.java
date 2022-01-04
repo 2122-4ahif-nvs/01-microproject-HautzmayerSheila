@@ -36,12 +36,22 @@ class PersonTest {
 
     @Test
     public void getAllPeople(){
-        List<Person> people = (List<Person>) entityManager.createNamedQuery("Person.findAllPeople", Person.class).getResultList();
-        assertThat(people.size()).isEqualTo(4);
+        List<Person> people = (List<Person>) entityManager.
+                createNamedQuery("Person.findAllPeople", Person.class).getResultList();
+        assertThat(people.size()).isEqualTo(3);
 
         logger.info("Number of people: " + people.size());
         logger.info(people);
 
+    }
+
+    @Test
+    public void deletePerson(){
+        personRepository.deletePersonById(4L);
+        List<Person> people = (List<Person>) entityManager.
+                createNamedQuery("Person.findAllPeople", Person.class).getResultList();
+        assertThat(people.size()).isEqualTo(3);
+        logger.info("Number of people: " + people.size());
     }
 
 }

@@ -41,4 +41,9 @@ public class PersonRepository {
 
     }
 
+    @Transactional
+    public void deletePersonById(Long id){
+        em.remove(findPersonById(id));
+    }
+
 }

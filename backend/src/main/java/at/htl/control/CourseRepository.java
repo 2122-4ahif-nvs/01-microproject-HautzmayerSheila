@@ -1,6 +1,7 @@
 package at.htl.control;
 
 import at.htl.entity.Course;
+import at.htl.entity.Person;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -26,7 +27,16 @@ public class CourseRepository {
         return entityManager.createQuery("Select c from Course c").getResultList();
     }
 
+    public Course findCourseById(Long id){
+        return entityManager.find(Course.class, id);
+    }
+
     public void addCourse(@Valid Course course) {
         this.save(course);
+    }
+
+    @Transactional
+    public void deleteCourseById(Long id){
+        entityManager.remove(findCourseById(id));
     }
 }

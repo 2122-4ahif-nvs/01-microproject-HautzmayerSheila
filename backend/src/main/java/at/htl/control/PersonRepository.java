@@ -41,6 +41,15 @@ public class PersonRepository {
 
     }
 
+    public Person findPersonByName(String name){
+        TypedQuery<Person> query = em
+                .createNamedQuery("Person.findPersonByName",Person.class).setParameter("name", name);
+
+        Person person = query.getSingleResult();
+        return person;
+
+    }
+
     @Transactional
     public void deletePersonById(Long id){
         em.remove(findPersonById(id));

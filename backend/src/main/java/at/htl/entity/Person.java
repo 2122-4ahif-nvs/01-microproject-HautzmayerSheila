@@ -16,7 +16,12 @@ import java.util.List;
         @NamedQuery(
                 name = "Person.findPersonById",
                 query = "Select p from Person p where p.id = :id"
-        )})
+        ),
+        @NamedQuery(
+                name = "Person.findPersonByName",
+                query = "Select p from Person p where p.firstName = :name"
+                )
+})
 
 
 public class Person {

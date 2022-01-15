@@ -2,7 +2,6 @@ package at.htl.boundary;
 
 import at.htl.control.AppointmentRepository;
 import at.htl.entity.Appointment;
-import at.htl.entity.Person;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

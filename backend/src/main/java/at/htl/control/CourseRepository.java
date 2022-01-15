@@ -1,7 +1,6 @@
 package at.htl.control;
 
 import at.htl.entity.Course;
-import at.htl.entity.Person;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

@@ -5,7 +5,6 @@ import at.htl.entity.Person;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -34,7 +33,7 @@ public class PersonRepository {
 
     public Person findPersonByIdNamedQuery(){
         TypedQuery<Person> query = em
-                .createNamedQuery("Person.findPersonById",Person.class).setParameter("id", 1L);
+                .createNamedQuery("Person.findPersonById", Person.class).setParameter("id", 1L);
 
         Person person = query.getSingleResult();
         return person;
@@ -43,7 +42,7 @@ public class PersonRepository {
 
     public Person findPersonByName(String name){
         TypedQuery<Person> query = em
-                .createNamedQuery("Person.findPersonByName",Person.class).setParameter("name", name);
+                .createNamedQuery("Person.findPersonByName", Person.class).setParameter("name", name);
 
         Person person = query.getSingleResult();
         return person;

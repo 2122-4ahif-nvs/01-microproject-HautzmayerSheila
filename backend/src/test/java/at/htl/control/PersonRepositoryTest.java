@@ -6,9 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+
 @QuarkusTest
 class PersonRepositoryTest {
     @Inject

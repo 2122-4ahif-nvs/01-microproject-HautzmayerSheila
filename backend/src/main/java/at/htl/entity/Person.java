@@ -1,6 +1,5 @@
 package at.htl.entity;
 
-import javax.json.bind.annotation.JsonbProperty;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

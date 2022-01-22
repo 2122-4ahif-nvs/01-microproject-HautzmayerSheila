@@ -5,3 +5,28 @@ Content-Type: application/json
   "firstName":"Mimi",
   "lastName":"Muh"
 }
+
+###
+
+GET http://localhost:8080/api/security/public
+
+###
+
+GET http://localhost:8080/api/security/admin
+
+###
+
+GET http://localhost:8080/api/security/admin
+Authorization: Basic admin admin
+
+###
+
+GET http://localhost:8080/api/security/me
+Authorization: Basic admin admin
+
+###
+
+GET http://localhost:8080/api/security/me
+Authorization: Basic user user
+
+###

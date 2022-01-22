@@ -6,6 +6,7 @@ import io.quarkus.runtime.StartupEvent;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -27,6 +28,7 @@ public class InitBean {
     @Inject
     CoursePersonRepository coursePersonRepository;
 
+    @Transactional
     void init(@Observes StartupEvent startupEvent) throws IOException {
 
 
@@ -74,6 +76,13 @@ public class InitBean {
 
         course1.getAppointments().addAll(appointments);
         courseRepository.save(course1);*/
+
+        // reset and load all test users
+        User.deleteAll();
+        User.add("sheilaH", "nvsissupa", "admin");
+        User.add("annaH", "pink", "user");
+        User.add("admin", "admin", "admin");
+        User.add("user", "user", "user");
 
     }
 

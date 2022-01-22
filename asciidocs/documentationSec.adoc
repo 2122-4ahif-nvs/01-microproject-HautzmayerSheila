@@ -1,0 +1,101 @@
+= Dokumentation
+
+== Security-JPA
+
+=== Referenz
+
+* https://quarkus.io/guides/security-jpa
+
+=== Dependencies
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-security-jpa</artifactId>
+</dependency>
+----
+
+=== Was macht Security für JPA
+
+Zugriffskontrollen und das Ausfiltern in der Datenbank wird mit Annotationen umgesetzt.
+Dadurch werden nicht erlaubte Daten nicht unnötig geladen und Teile von sicherheitsrelevantem Code können eliminiert werden.
+Vorteile sind dadurch geringerer Ressourcenverbrauch, weniger Code-Duplikationen und Erleichterung der Les- und Wartbarkeit.
+
+=== Erklärung zur Umsetzung
+
+Umsetzung wurde in folgendem Repo durchgeführt
+
+* https://github.com/2122-4ahif-nvs/08-lab-security-jpa-HautzmayerSheila
+
+.PublicResource.java
+[source,java]
+----
+@GET
+    @PermitAll <1>
+    @Produces(MediaType.TEXT_PLAIN)
+    public String publicResource() {
+        return "public";
+   }
+----
+
+<1> Mit der Annotation @PermitAll beim Endpoint ist der Endpoint public und jede Rolle kann darauf zugreifen.
+
+.AdminResource.java
+[source,java]
+----
+@GET
+    @RolesAllowed("admin") <1>
+    @Produces(MediaType.TEXT_PLAIN)
+    public String adminResource() {
+        return "admin";
+    }
+----
+
+<1> Mit der Annotation @RolesAllowed bei einem Endpoint wird garantiert, dass nur eine bestimmte Rolle Zugriff auf den Endpoint hat.
+
+.UserResource.java
+[source,java]
+----
+@GET
+    @RolesAllowed("user") <1>
+    @Path("/me")
+    public String me(@Context SecurityContext securityContext) { <2>
+        return securityContext.getUserPrincipal().getName();
+    }
+----
+
+<1> Nur die Rolle user ist erlaubt auf den Endpoint zuzugreifen.
+<2> Mit dem SecurityContext erhält man Zugriff auf den aktuellen Authentifizierten.
+
+
+.User.java
+[source,java]
+----
+@Entity
+@Table(name = "test_user")
+@UserDefinition <1>
+public class User extends PanacheEntity {
+    @Username <2>
+    public String username;
+    @Password <3>
+    public String password;
+    @Roles <4>
+    public String role;
+
+    public static void add(String username, String password, String role) { <5>
+        User user = new User();
+        user.username = username;
+        user.password = BcryptUtil.bcryptHash(password);
+        user.role = role;
+        user.persist();
+    }
+}
+----
+
+<1> Mit der Annotation @UserDefinition wird die security-jpa extension initialisiert
+<2> @Username zeigt die Verwendung eines Feldes als Benutzernamen an
+<3>  @Password zeigt die Verwendung eines Feldes als Passwort an. Dabei werden defaultmäßig bcrypt hashed Passwörter verwendet (Kann anders konfiguriert werden).
+<4>  @Roles zeigt die Rollen einer Person mit Komma-Seperation an.
+<5> Methode um einen User hinzuzufügen.
+

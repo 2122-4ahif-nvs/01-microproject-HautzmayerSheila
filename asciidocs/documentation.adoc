@@ -368,3 +368,11 @@ public class HelloWorldResource {
     }
 }
 ----
+
+== Security mit .properties Files
+
+* https://2122-4ahif-nvs.github.io/01-microproject-HautzmayerSheila/documentationProp.html
+
+== Security in JPA
+
+* https://2122-4ahif-nvs.github.io/01-microproject-HautzmayerSheila/documentationSec.html

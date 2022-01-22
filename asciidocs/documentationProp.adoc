@@ -2,22 +2,7 @@
 
 == Security mit .Properties Files
 
-=== Refernez
 
-* https://quarkus.io/guides/security-properties
-
-=== Dependencies
-
-[source,xml]
-----
-<dependency>
-<groupId>io.quarkus</groupId>
-<artifactId>quarkus-elytron-security-properties-file</artifactId>
-</dependency>
-----
-
-=== Was machen .Properties Files für Security
-Bei der Properties Files Realm Configuration wird das mapping von Usern mit Passwörtern und Usern mit Rollen ermöglicht.
 
 === Erklärung zur Umsetzung
 Umsetzung ist im Mikroprojekt unter folgendem Link

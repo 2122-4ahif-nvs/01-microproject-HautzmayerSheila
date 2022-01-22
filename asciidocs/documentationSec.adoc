@@ -2,25 +2,7 @@
 
 == Security-JPA
 
-=== Referenz
 
-* https://quarkus.io/guides/security-jpa
-
-=== Dependencies
-
-[source,xml]
-----
-<dependency>
-    <groupId>io.quarkus</groupId>
-    <artifactId>quarkus-security-jpa</artifactId>
-</dependency>
-----
-
-=== Was macht Security für JPA
-
-Zugriffskontrollen und das Ausfiltern in der Datenbank wird mit Annotationen umgesetzt.
-Dadurch werden nicht erlaubte Daten nicht unnötig geladen und Teile von sicherheitsrelevantem Code können eliminiert werden.
-Vorteile sind dadurch geringerer Ressourcenverbrauch, weniger Code-Duplikationen und Erleichterung der Les- und Wartbarkeit.
 
 === Erklärung zur Umsetzung
 

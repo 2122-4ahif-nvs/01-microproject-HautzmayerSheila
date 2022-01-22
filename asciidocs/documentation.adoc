@@ -2,6 +2,10 @@
 
 == Websockets
 
+=== Referenz
+
+* https://quarkus.io/guides/websockets
+
 === Dependencies
 
 [source,xml]
@@ -24,6 +28,10 @@ Idee liegt darin, dass Personen fragen wegen der Tanztermine, Tanzkurse, ... ste
 
 == GraphQL
 
+=== Referenz
+
+* https://quarkus.io/guides/smallrye-graphql
+
 === Dependencies
 
 [source,xml]
@@ -45,6 +53,7 @@ https://github.com/2122-4ahif-nvs/04-lab-graphql-HautzmayerSheila
 <1> @GraphQLApi muss über der Klasse hinzugefügt werden.
 <2> Bei der findAll() Methode wird @Query(...) hinzugefügt um später darauf zugreifen zu können.
 
+.boundary/PersonResource.java
 [source, java]
 ----
 @GraphQLApi <1>
@@ -88,6 +97,10 @@ lastName
 
 == Validation
 
+=== Referenz
+
+* https://quarkus.io/guides/validation
+
 === Dependencies
 
 [source,xml]
@@ -113,6 +126,7 @@ https://github.com/2122-4ahif-nvs/05-validation-qute-HautzmayerSheila
 
 <1> Validierung über das zu validierende Feld schreiben
 
+.entity/Course.java
 [source, java]
 ----
 
@@ -137,6 +151,7 @@ private String name;
 <1> Klasse Result hinzufügen
 <2> @Valid wird bei der Parametergabe verwendet
 
+.boundary/CourseResource.java
 [source, java]
 ----
 @Path("/end-point-method-validation")
@@ -180,6 +195,7 @@ public static class Result {  <1>
 <1> Aufruf der Methode im Repo.
 <2> @Valid Annotation direkt in der Methode im Repo hinzufügen
 
+.boundary/CourseResource.java
 [source, java]
 ----
 @Path("/repo-method-validation")
@@ -196,6 +212,7 @@ return new Result(e.getConstraintViolations());
 }
 ----
 
+.control/CourseRepository.java
 [source,java]
 ----
 public void addCourse(@Valid Course course) { <2>
@@ -205,6 +222,10 @@ this.save(course);
 
 
 == Qute
+
+=== Referenz
+
+* https://quarkus.io/guides/qute
 
 === Dependencies
 
@@ -239,6 +260,7 @@ Welcome to the dance studio {name}!
 <2> Template wird erzeugt
 <3> Neue Template Instanz wird zurückgegeben.
 
+.boundary/HelloResource.java
 [source,java]
 ----
 @Path("hello")
@@ -259,6 +281,10 @@ public class HelloResource { <1>
 ----
 
 == GRPC
+
+=== Referenz
+
+* https://quarkus.io/guides/grpc-getting-started
 
 === Dependencies
 
@@ -327,6 +353,7 @@ im Terminal ausführen.
 <3> Das Service Interface Greeter wird implementiert
 <4> Methode um hello zurückzuliefern wird hinzugefügt
 
+.control/HelloWorldRepository
 [source,java]
 ----
 <1>
@@ -345,6 +372,7 @@ public class HelloWorldRepository implements Greeter { <3>
 <1> Resource wird implementiert
 <2> @GRPCClient wird injected
 
+.boundary/HelloWorldResource
 [source, java]
 ----
 <1>
@@ -371,8 +399,57 @@ public class HelloWorldResource {
 
 == Security mit .properties Files
 
+=== Referenz
+
+* https://quarkus.io/guides/security-properties
+
+=== Dependencies
+
+[source,xml]
+----
+<dependency>
+<groupId>io.quarkus</groupId>
+<artifactId>quarkus-elytron-security-properties-file</artifactId>
+</dependency>
+----
+
+=== Was machen .Properties Files für Security
+Bei der Properties Files Realm Configuration wird das mapping von Usern mit Passwörtern und Usern mit Rollen ermöglicht.
+
+=== Umsetzung im Mikroprojekt
+
 * https://2122-4ahif-nvs.github.io/01-microproject-HautzmayerSheila/documentationProp.html
+
 
 == Security in JPA
 
+=== Referenz
+
+* https://quarkus.io/guides/security-jpa
+
+
+=== Dependencies
+
+[source,xml]
+----
+<dependency>
+    <groupId>io.quarkus</groupId>
+    <artifactId>quarkus-security-jpa</artifactId>
+</dependency>
+----
+
+=== Was macht Security für JPA
+
+Zugriffskontrollen und das Ausfiltern in der Datenbank wird mit Annotationen umgesetzt.
+Dadurch werden nicht erlaubte Daten nicht unnötig geladen und Teile von sicherheitsrelevantem Code können eliminiert werden.
+Vorteile sind dadurch geringerer Ressourcenverbrauch, weniger Code-Duplikationen und Erleichterung der Les- und Wartbarkeit.
+
+
+=== Umsetzung im ÜbungsRepository
+
 * https://2122-4ahif-nvs.github.io/01-microproject-HautzmayerSheila/documentationSec.html
+
+=== Umsetzung im Mikroprojekt
+
+Am branch security-jpa. Fast genau selber Vorgang wie im Übungsrepository. Doku ist beim oberen Link nachzulesen.
+Einziger Unterschied -> Nur eine Resource (SecurityResource) für Endpoints für Public, Admin und User.

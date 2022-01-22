@@ -1,0 +1,59 @@
+= Dokumetnation
+
+== Security mit .Properties Files
+
+=== Refernez
+
+* https://quarkus.io/guides/security-properties
+
+=== Dependencies
+
+[source,xml]
+----
+<dependency>
+<groupId>io.quarkus</groupId>
+<artifactId>quarkus-elytron-security-properties-file</artifactId>
+</dependency>
+----
+
+=== Was machen .Properties Files für Security
+Bei der Properties Files Realm Configuration wird das mapping von Usern mit Passwörtern und Usern mit Rollen ermöglicht.
+
+=== Erklärung zur Umsetzung
+Umsetzung ist im Mikroprojekt unter folgendem Link
+
+* https://github.com/2122-4ahif-nvs/01-microproject-HautzmayerSheila
+
+.application.properties
+[source,properties]
+----
+quarkus.security.users.file.enabled=true
+quarkus.security.users.file.users=test-users.properties
+quarkus.security.users.file.roles=test-roles.properties
+quarkus.security.users.file.realm-name=MyRealm
+quarkus.security.users.file.plain-text=true
+----
+
+.test-users.properties
+[source,properties]
+----
+scott=jb0ss <1>
+jdoe=p4ssw0rd
+stuart=test
+noadmin=n0Adm1n
+
+----
+
+<1> User Scott hat beispielsweise das Passwort jb0ss
+
+.test-roles.properties
+[source,properties]
+----
+scott=Admin,admin,Tester,user <1>
+jdoe=NoRolesUser
+stuart=admin,user
+noadmin=user
+
+----
+
+<1> User scott hat beispielsweise die Rollen Admin,admin,Tester und user

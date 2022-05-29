@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+
+
+class Raum{
+    -raumNr: Long
+}
+
+
+class Kurs{
+    -kursNr: int
+    -maxPersonen: int
+    -beschreibung: String
+    -name: String
+}
+
+class Kurseinteilung{
+    -kurs: Kurs
+    -person: Person
+    -person_typ: String
+}
+
+class Person{
+    -personenNr: int
+    -vorname: String
+    -nachname: String
+}
+
+class Termin{
+    -von: DateTime
+    -bis: DateTime
+    -kurs: Kurs
+    -raum: Raum
+}
+
+
+Kurs "*" -- "*" Person
+Kurs "*" -- "*" Raum
+
+(Raum, Kurs) .. Termin
+(Kurs, Person) .. Kurseinteilung
+@enduml

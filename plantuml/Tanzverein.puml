@@ -1,0 +1,46 @@
+@startuml
+left to right direction
+
+
+class Room{
+    -roomNr: int
+    -name: String
+}
+
+
+class Course{
+    -courseNr: int
+    -maxPeople: int
+    -description: String
+    -name: String
+}
+
+
+class Person{
+    -personenNr: int
+    -vorname: String
+    -nachname: String
+    -personCapability: PersonCapability
+}
+
+class DanceLesson{
+    -danceLessonNr: int
+    -from: DateTime
+    -to: DateTime
+    -course: Course
+    -person: Person
+    -room: Room
+}
+class PersonCapability{
+}
+
+class PersonType{
+}
+
+Course "*" -- "*" Person
+Person -- PersonCapability
+Person -- PersonType
+Room "1" -- "*" DanceLesson
+
+(Person, Course) .. DanceLesson
+@enduml

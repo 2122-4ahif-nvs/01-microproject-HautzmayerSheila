@@ -1,0 +1,15 @@
+@startuml
+class Person{
+    -id: Long
+    -firstName: String
+    -lastName: String
+    -company: Company
+    -birthDate: Date
+}
+class Company{
+    -id: Long
+    -companyName: String
+}
+
+Company "1" -l- "*" Person
+@enduml
